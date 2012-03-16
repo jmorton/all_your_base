@@ -8,5 +8,19 @@ require 'all_your_base'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  
+
+  module ActiveRecord
+    class Base
+      def self.configurations        
+        YAML.load_file('spec/config/database.yml')
+      end
+    end
+  end
+
+  class Rails
+    def self.env
+      'test'
+    end
+  end
+
 end
