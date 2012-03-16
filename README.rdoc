@@ -1,9 +1,65 @@
 = all_your_base
 
-Description goes here.
+Use multiple databases without ado.
+
+== Example Usage
+
+Define some models:
+
+  app/models/person.rb
+
+    class Person < ActiveRecord::Base
+      base :mysql
+    end
+
+  app/models/place.rb
+
+    class Place < ActiveRecord::Base
+      base :postgres
+    end
+
+  app/models/thing.rb
+
+    class Thing < ActiveRecord::Base
+      base :sqlite
+    end
+
+
+Configure your application:
+
+  config/database.yml
+
+    development:
+
+      # the default configuration
+      adapter:     sqlite3
+      database:    db/app_development.sqlite3
+      pool:        5
+      timeout:     5000
+
+      oracle:
+        adapter:   oracle_enhanced
+        username:  development
+        password:  password
+        database:  oracle.vagrant:1521/XE
+
+      mysql:
+        adapter:   mysql
+        encoding:  utf8
+        host:      mysql.local
+        username:  root
+        password:  password
+        database:  app_development
+
+      postgres:
+        adapter:   postgres
+        encoding:  utf8
+        host:      postgres.local
+        database:  app_development
+
 
 == Contributing to all_your_base
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
@@ -16,4 +72,3 @@ Description goes here.
 
 Copyright (c) 2012 Jon Morton. See LICENSE.txt for
 further details.
-
