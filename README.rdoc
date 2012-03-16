@@ -2,6 +2,10 @@
 
 Use multiple databases without ado.
 
+Q: Why the heck would I want to use more than one database?!
+A: Because someone set you up the bomb.
+
+
 == Example Usage
 
 Define some models:
@@ -30,20 +34,20 @@ Configure your application:
   config/database.yml
 
     development:
-
-      # the default configuration
       adapter:     sqlite3
       database:    db/app_development.sqlite3
       pool:        5
       timeout:     5000
 
-      oracle:
+    oracle:
+      development:
         adapter:   oracle_enhanced
         username:  development
         password:  password
         database:  oracle.vagrant:1521/XE
 
-      mysql:
+    mysql:
+      development:
         adapter:   mysql
         encoding:  utf8
         host:      mysql.local
@@ -51,7 +55,8 @@ Configure your application:
         password:  password
         database:  app_development
 
-      postgres:
+    postgres:
+      development:
         adapter:   postgres
         encoding:  utf8
         host:      postgres.local
