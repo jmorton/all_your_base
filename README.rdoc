@@ -1,37 +1,66 @@
-= all_your_base
+all_your_base
+-------------
 
 Use multiple databases without ado.
 
+
+Frequently Asked Questions
+--------------------------
+
 Q: Why the heck would I want to use more than one database?!
+
 A: Because someone set you up the bomb.
 
 
-== Example Usage
+Origin
+------
+
+all_your_base is a less robust version of Karle Durante's [SecondBase][1]
+
+Use SecondBase instead if you...
+  * need to load fixture data into the second database
+  * want migrations segregrated into different directories
+  * need at most two extra database
+
+Use all_your_base if you...
+  * need more than two databases
+  * can use factories instead of fixtures to generate test data
+  * can tolerate mildly more verbose migrations all in one directory
+  * don't mind if the default database holds *all* migration history
+
+Example Usage
+-------------
+
+Update your Gemfile
+
+    gem 'all_your_base', :git => 'git@github.com:jmorton/all_your_base.git'
+
 
 Define some models:
 
-  app/models/person.rb
+app/models/person.rb
 
     class Person < ActiveRecord::Base
+      include AllYourBase
       base :mysql
     end
 
-  app/models/place.rb
+app/models/place.rb
 
     class Place < ActiveRecord::Base
+      include AllYourBase
       base :postgres
     end
 
-  app/models/thing.rb
+app/models/thing.rb
 
     class Thing < ActiveRecord::Base
+      include AllYourBase
       base :sqlite
     end
 
 
-Configure your application:
-
-  config/database.yml
+Configure your application's database connections:
 
     development:
       adapter:     sqlite3
@@ -39,20 +68,11 @@ Configure your application:
       pool:        5
       timeout:     5000
 
-    oracle:
-      development:
-        adapter:   oracle_enhanced
-        username:  development
-        password:  password
-        database:  oracle.vagrant:1521/XE
-
     mysql:
       development:
         adapter:   mysql
         encoding:  utf8
         host:      mysql.local
-        username:  root
-        password:  password
         database:  app_development
 
     postgres:
@@ -61,9 +81,10 @@ Configure your application:
         encoding:  utf8
         host:      postgres.local
         database:  app_development
+    
 
-
-== Contributing to all_your_base
+Contributing to all_your_base
+-----------------------------
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
@@ -73,7 +94,10 @@ Configure your application:
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
-
+Copyright
+---------
 Copyright (c) 2012 Jon Morton. See LICENSE.txt for
 further details.
+
+
+[1]: https://github.com/karledurante/secondbase
