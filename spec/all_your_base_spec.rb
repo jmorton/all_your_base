@@ -2,11 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 
 class Person < ActiveRecord::Base
+  include AllYourBase
   base :foo
   belongs_to :place
 end
 
 class Place < ActiveRecord::Base
+  include AllYourBase
   base :bar
   has_many :people
 end
@@ -41,11 +43,11 @@ describe AllYourBase do
   context "associations between models stored in different databases" do
 
     before(:all) do
+      @home  = Place.create(:name => 'home')
+      @work  = Place.create(:name => 'work')
       @me    = Person.create(:name => 'me', :place => @home)
       @you   = Person.create(:name => 'you', :place => @home)
       @them  = Person.create(:name => 'them', :place => @work)
-      @home  = Place.create(:name => 'home')
-      @work  = Place.create(:name => 'work')
     end    
 
     it "works with belongs_to associations, even across databases" do
