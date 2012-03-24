@@ -1,20 +1,19 @@
 test:
-
   adapter:     sqlite3
-  database:    tmp/test.sqlite3
+  database:    test.sqlite3
   pool:        5
   timeout:     5000
 
 foo:
   test:
     adapter:     sqlite3
-    database:    tmp/test_foo.sqlite3
+    database:    test_foo.sqlite3
     pool:        5
     timeout:     5000
 
 bar:
   test:
     adapter:     sqlite3
-    database:    tmp/test_bar.sqlite3
+    database:    test_bar.sqlite3
     pool:        5
     timeout:     5000
