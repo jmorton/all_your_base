@@ -14,3 +14,9 @@ group :development do
   gem "sqlite3"
 end
 
+group :test do
+  gem "rspec", "~> 2.8.0"
+  gem "sqlite3", :platform => [:ruby, :mswin, :mingw]
+end
+
+

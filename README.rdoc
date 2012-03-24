@@ -3,6 +3,7 @@ all_your_base
 
 Use multiple databases without ado.
 
+{<img src="https://secure.travis-ci.org/jmorton/all_your_base.png?branch=master" alt="Build Status" />}[http://travis-ci.org/jmorton/all_your_base]
 
 Frequently Asked Questions
 --------------------------
