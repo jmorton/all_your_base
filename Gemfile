@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "activerecord", "~> 3.0.10"
+gem "activerecord", ">= 3.0.10"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
